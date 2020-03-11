@@ -10,22 +10,38 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<link rel="stylesheet" href="${conPath }/css/style.css">
 </head>
 <body>
 	<header>
-        <div class="container-expand-md navbar-dark bg-dark">
-            <ul class="nav justify-content-end">
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Login</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link bg-dark" href="#">Join</a>
-                </li>
-              </ul>
-        </div>  
-        </nav>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container-expand-md navbar-dark bg-dark p-2">
+			<c:if test="${empty member && empty admin}">
+	            <ul class="nav justify-content-end">
+	                <li class="nav-item">
+	                  <a class="nav-link" href="${conPath }/signinView.do">Sign-in</a>
+	                </li>
+	                <li class="nav-item">
+	                  <a class="nav-link bg-dark" href="${conPath }/signupView.do">Sign-up</a>
+	                </li>
+	              </ul>
+			</c:if>
+			<c:if test="${not empty member }">
+		 		<ul class="nav justify-content-end">
+					<li class="nav-item">
+	                  <a class="nav-link" href="${conPath }/memberView.do">${member.memberName }님</a>
+	                </li>
+					<li class="nav-item">
+	                  <a class="nav-link" href="${conPath }/signinView.do">장바구니</a>
+	                </li>
+					<li class="nav-item">
+	                  <a class="nav-link" href="${conPath }/signinView.do">주문목록</a>
+	                </li>
+	                <li class="nav-item">
+	                  <a class="nav-link bg-dark" href="${conPath }/logout.do">Logout</a>
+	                </li>
+             	 </ul>
+			</c:if>
+        </div> 
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark p-3">
             <a class="navbar-brand" href="#">STL</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,7 +50,7 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="${conPath }/main.do">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -75,8 +91,5 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
             </div>
         </nav>
     </header>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>

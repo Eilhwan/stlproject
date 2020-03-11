@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+.container{
+	margin: 0 auto;
+}
+
+.btn-dark{
+	width: 100%;
+	height: 50px;
+}
+.form-control{
+	width: 100%;
+	border-radius: 0px;
+	height: 50px;
+}
+.addr .btn-dark{
+	width: 170px;
+	height: 30px;
+}
+.addr .zipcode{
+	width: 200px;
+}
+.addr .form-control{
+}
