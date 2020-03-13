@@ -24,7 +24,7 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
 	                </li>
 	              </ul>
 			</c:if>
-			<c:if test="${not empty member }">
+			<c:if test="${not empty member && empty admin}">
 		 		<ul class="nav justify-content-end">
 					<li class="nav-item">
 	                  <a class="nav-link" href="${conPath }/memberView.do">${member.memberName }님</a>
@@ -40,8 +40,24 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
 	                </li>
              	 </ul>
 			</c:if>
+			<c:if test="${not empty admin && empty member}">
+		 		<ul class="nav justify-content-end">
+					<li class="nav-item">
+	                  <a class="nav-link" href="${conPath }/memberView.do">관리자 ${admin.adminId }님</a>
+	                </li>
+					<li class="nav-item">
+	                  <a class="nav-link" href="${conPath }/adminView.do">관리메뉴</a>
+	                </li>
+					<li class="nav-item">
+	                  <a class="nav-link" href="${conPath }/noticeBoardView.do">공지사항</a>
+	                </li>
+	                <li class="nav-item">
+	                  <a class="nav-link bg-dark" href="${conPath }/logout.do">Logout</a>
+	                </li>
+             	 </ul>
+			</c:if>
         </div> 
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark p-3">
+        <nav class="navbar navbar-expand navbar-dark bg-dark p-3">
             <a class="navbar-brand" href="#">STL</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,18 +65,18 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="${conPath }/main.do">Home <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                            상품보기
+                    <li class="nav-item dropdown hovered">
+                        <a class="nav-link" href="#" id="navbardrop" data-toggle="dropdown">
+                            		상품보기
                         </a>
                         <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item">홍차</a>
+                        <a href="${conPath }/productListView.do" class="dropdown-item">홍차</a>
                         <a href="#" class="dropdown-item">녹차</a>
                         <a href="#" class="dropdown-item">보이차</a>
-                        <a href="#" class="dropdown-item">기타</a>
+                        <a href="#" class="dropdown-item">전체</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -68,7 +84,7 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
                             게시판
                         </a>
                         <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item">공지사항</a>
+                        <a href="${conPath }/noticeBoardView.do" class="dropdown-item">공지사항</a>
                         <a href="#" class="dropdown-item">이벤트</a>
                         <a href="#" class="dropdown-item">리뷰</a>
                         </div>

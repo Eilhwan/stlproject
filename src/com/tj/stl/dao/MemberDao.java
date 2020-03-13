@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -219,6 +220,87 @@ public class MemberDao {
 				e.printStackTrace();
 			}
 		}
+		return result;
+	}
+	public ArrayList<MemberDto> getMemberlist(int startRow, int endRow){
+		ArrayList<MemberDto> list = new ArrayList<MemberDto>();
+		String sql = "SELECT * FROM (SELECT ROWNUM RN, A.* FROM (SELECT * FROM MEMBER) A)" + 
+				"    WHERE RN BETWEEN ? AND ? AND MEMBERSTATUS > 0";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				do {
+					String memberId = rs.getString("memberId");
+					String memberPw = rs.getString("memberPw");
+					String memberName = rs.getString("memberName");
+					String memberTel = rs.getString("memberTel");
+					String memberEmail = rs.getString("memberEmail");
+					String memberAddress = rs.getString("memberAddress");
+					String memberPost = rs.getString("memberPost");
+					int totalSpent = rs.getInt("totalSpent");
+					int gradeLevel = rs.getInt("gradeLevel");
+					Date memberBirth = rs.getDate("memberBirth");
+					Date memberRdate = rs.getDate("memberRdate");
+					MemberDto member = new MemberDto(memberId, memberPw, memberName, memberTel, memberEmail, memberAddress, memberPost, totalSpent, gradeLevel, memberRdate, memberBirth);
+					list.add(member);
+				} while (rs.next());
+			}
+			
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return list;
+	}
+	public int getMemberCnt() {
+		int result = 0;
+		String sql = "SELECT COUNT(*) FROM MEMBER WHERE MEMBERSTATUS > 0";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		return result;
 	}
 }

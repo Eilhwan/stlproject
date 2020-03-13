@@ -20,7 +20,9 @@ public class MemberModifyService implements Service {
 		String memberEmail = request.getParameter("memberEmail");
 		String nowPw = request.getParameter("nowPw");
 		String memberPw = request.getParameter("memberPw");
-		
+		if (memberPw != null && nowPw == null) {
+			
+		}
 		if (memberPw == null) {
 			memberPw = nowPw;
 		}

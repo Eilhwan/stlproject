@@ -4,22 +4,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.tj.stl.dao.AdminDao;
 import com.tj.stl.dao.MemberDao;
 
-public class SigninService implements Service {
+public class AdminSigninService implements Service {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		String memberId = request.getParameter("memberId");
-		String memberPw = request.getParameter("memberPw");
-
-		MemberDao dao = MemberDao.getInstance();
-		if (dao.memberSignin(memberId, memberPw) == null) {
+		String adminId = request.getParameter("adminId");
+		String adminPw = request.getParameter("adminPw");
+		
+		AdminDao dao = AdminDao.getInstance();
+		if (dao.adminSignin(adminId, adminPw) == null) {
 			request.setAttribute("signinerror", "아이디와 비밀번호를 확인하세요.");
-		} else {
+		}else {
 			HttpSession session = request.getSession();
-			session.setAttribute("member", dao.memberSignin(memberId, memberPw));
+			session.setAttribute("admin", dao.adminSignin(adminId, adminPw));
 		}
 	}
+
 
 }
