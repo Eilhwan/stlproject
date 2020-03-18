@@ -149,7 +149,7 @@ public class MemberDao {
 	//로그인 메서드
 	public MemberDto memberSignin(String memberId, String memberPw) {
 		MemberDto member = null;
-		String sql = "SELECT * FROM MEMBER WHERE MEMBERID = ? AND MEMBERPW= ? AND MEMBERSTATUS = 1";
+		String sql = "SELECT * FROM MEMBER M, MEMBERGRADE MG WHERE M.GRADELEVEL = MG.GRADELEVEL AND MEMBERID = ? AND MEMBERPW= ? AND MEMBERSTATUS = 1";
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -167,11 +167,14 @@ public class MemberDao {
 				String memberEmail = rs.getString("memberEmail");
 				String memberAddress = rs.getString("memberAddress");
 				String memberPost = rs.getString("memberPost");
-				int totalSpend = rs.getInt("totalSpent");
+				String gradeName = rs.getString("gradeName");
+				int totalSpent = rs.getInt("totalSpent");
 				int gradeLevel = rs.getInt("gradeLevel");
+				int memberPoint = rs.getInt("memberPoint");
 				Date memberRdate = rs.getDate("memberRdate");
 				Date memberBirth = rs.getDate("memberBirth");
-				member = new MemberDto(memberId, memberPw, memberName, memberTel, memberEmail, memberAddress, memberPost, totalSpend, gradeLevel, memberRdate, memberBirth);
+				member = new MemberDto(memberId, memberPw, memberName, memberTel, memberEmail, memberAddress, memberPost, gradeName, 0, gradeLevel, memberRdate, memberBirth, memberPoint);
+				member.setGradeName(gradeName);
 				System.out.println(member+"세션 받았음");
 			}
 			System.out.println(member + "의 정보로 로그인을 시도하였습니다.");
@@ -248,9 +251,11 @@ public class MemberDao {
 					String memberPost = rs.getString("memberPost");
 					int totalSpent = rs.getInt("totalSpent");
 					int gradeLevel = rs.getInt("gradeLevel");
+					int memberPoint = rs.getInt("memberPoint");
 					Date memberBirth = rs.getDate("memberBirth");
 					Date memberRdate = rs.getDate("memberRdate");
-					MemberDto member = new MemberDto(memberId, memberPw, memberName, memberTel, memberEmail, memberAddress, memberPost, totalSpent, gradeLevel, memberRdate, memberBirth);
+					
+					MemberDto member = new MemberDto(memberId, memberPw, memberName, memberTel, memberEmail, memberAddress, memberPost, null, totalSpent, gradeLevel, memberRdate, memberBirth, memberPoint);
 					list.add(member);
 				} while (rs.next());
 			}

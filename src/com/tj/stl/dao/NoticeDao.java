@@ -91,7 +91,6 @@ public class NoticeDao {
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				do {
-					System.out.println("여기는?");
 					int noticeNo = rs.getInt("noticeNo");
 					String noticeName = rs.getString("noticeName");
 					String noticeContent = rs.getString("noticeContent");
@@ -100,7 +99,56 @@ public class NoticeDao {
 					String adminId = rs.getString("adminId");
 					
 					NoticeDto notice = new NoticeDto(noticeNo, noticeName, noticeContent, noticeRdate, noticevent, adminId);
-					System.out.println(notice);
+				
+					list.add(notice);
+				} while (rs.next());
+				
+			}
+			
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return list;
+	}
+	public ArrayList<NoticeDto> getEventlist(int startRow, int endRow){
+		ArrayList<NoticeDto> list = new ArrayList<NoticeDto>();
+		String sql = "SELECT * FROM (SELECT ROWNUM RN, A.* FROM (SELECT * FROM NOTICE ORDER BY NOTICEEVENT DESC, NOTICENO DESC) A)" + 
+				"    WHERE RN BETWEEN ? AND ? AND NOTICEEVENT > 0";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+		
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				do {
+					int noticeNo = rs.getInt("noticeNo");
+					String noticeName = rs.getString("noticeName");
+					String noticeContent = rs.getString("noticeContent");
+					Date noticeRdate = rs.getDate("noticeRdate");
+					byte noticevent = rs.getByte("noticeevent");
+					String adminId = rs.getString("adminId");
+					
+					NoticeDto notice = new NoticeDto(noticeNo, noticeName, noticeContent, noticeRdate, noticevent, adminId);
+					
 					list.add(notice);
 				} while (rs.next());
 				
@@ -192,7 +240,7 @@ public class NoticeDao {
 		}
 		return notice;
 	}
-	public NoticeDto getMainEvent(int row) {
+	public NoticeDto getMainNotice(int row) {
 		NoticeDto notice = null;
 		String sql = "SELECT * FROM (SELECT ROWNUM RN, N.* FROM (SELECT * FROM NOTICE where noticeevent != 1 ORDER BY NOTICENO DESC) N )  WHERE rn = ?";
 		
@@ -215,6 +263,45 @@ public class NoticeDao {
 				
 			}
 					
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return notice;
+	}
+	public NoticeDto getMainEvent(int row) {
+		NoticeDto notice = null;
+		String sql = "SELECT * FROM (SELECT ROWNUM RN, N.* FROM (SELECT * FROM NOTICE WHERE NOTICEEVENT = 1 ORDER BY NOTICENO DESC) N )  WHERE rn = ?";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, row);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				int noticeNo = rs.getInt("noticeNo");
+				String noticeName = rs.getString("noticeName");
+				String noticeContent = rs.getString("noticeContent");
+				Date noticeRdate = rs.getDate("noticeRdate");
+				byte noticeEvent = rs.getByte("noticeEvent");
+				String adminId = rs.getString("adminId");
+				notice = new NoticeDto(noticeNo, noticeName, noticeContent, noticeRdate, noticeEvent, adminId);
+				
+			}
+			
 			
 			
 		} catch (SQLException e) {

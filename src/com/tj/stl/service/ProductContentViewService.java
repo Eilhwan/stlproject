@@ -14,7 +14,7 @@ public class ProductContentViewService implements Service {
 		ProductDao dao = ProductDao.getInstance();
 		
 		
-		request.setAttribute("product", dao.getNoticeContent(productCode));
+		request.setAttribute("product", dao.getProductContent(productCode));
 
 	}
 

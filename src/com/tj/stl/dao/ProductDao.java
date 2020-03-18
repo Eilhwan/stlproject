@@ -15,6 +15,7 @@ import javax.sql.DataSource;
 import com.tj.stl.dto.NoticeDto;
 import com.tj.stl.dto.ProductBrand;
 import com.tj.stl.dto.ProductDto;
+import com.tj.stl.dto.ProductEnroll;
 import com.tj.stl.dto.ProductType;
 
 public class ProductDao {
@@ -138,12 +139,10 @@ public class ProductDao {
 					String ptypeName = rs.getString("ptypeName");
 					int ptypeCode = rs.getInt("ptypeCode");
 					int productPrice = rs.getInt("productPrice");
-					System.out.println("11여기는?");
 					int productRemain = rs.getInt("productRemain");
 					String productContent = rs.getString("productContent");
 					String productImg = rs.getString("productImg");
 					int pbrandCode = rs.getInt("pbrandCode");
-					System.out.println("여긴 오나?");
 					ProductDto product = new ProductDto(productCode, productName, pbrandName, ptypeName, ptypeCode, productPrice, productRemain, productContent, productImg, pbrandCode);
 					list.add(product);
 				} while (rs.next());
@@ -246,7 +245,7 @@ public class ProductDao {
 		return list;
 	}
 	//물품정보
-	public ProductDto getNoticeContent(int productCode) {
+	public ProductDto getProductContent(int productCode) {
 		ProductDto product = null;
 		String sql = "SELECT * FROM PRODUCT P, PRODUCT_BRAND B, PRODUCT_TYPE T" + 
 				"    WHERE P.PTYPECODE = t.ptypecode AND P.PBRANDCODE = B.PBRANDCODE AND PRODUCTCODE = ?";
@@ -319,5 +318,120 @@ public class ProductDao {
 		}
 		
 		return result;
+	}
+	public int chkBrand(String pBrandName) {
+		int result = 0;
+		String sql = "SELECT COUNT(*) FROM PRODUCT_BRAND WHERE PBRANDNAME= ?";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pBrandName);
+			result = pstmt.executeUpdate();
+			System.out.println(result == EXSIST_ON ? "브랜드 있음" : "브랜드 없음");
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+	}
+	public ArrayList<String> selectProductName(){
+		ArrayList<String> list = new ArrayList<String>();
+		String sql = "SELECT PRODUCTNAME FROM PRODUCT";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+		
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				do {
+					String productName = rs.getString(1);
+					System.out.println(productName);
+					list.add(productName);
+				} while (rs.next());
+			}
+			
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return list;
+	}
+	public ProductDto getUserProduct(String productName){
+		ProductDto product = null;
+		String sql = "SELECT * FROM PRODUCT P, product_type T, product_brand B " + 
+				"WHERE PRODUCTNAME = ? AND T.PTYPECODE = P.PTYPECODE AND B.PBRANDCODE = P.PBRANDCODE";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+		
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, productName);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {	
+				int productCode =rs.getInt("productCode"); 
+				productName = rs.getString("productName");
+				String pbrandName = rs.getString("pbrandName");
+				String ptypeName = rs.getString("ptypeName");
+				int ptypeCode = rs.getInt("ptypeCode");
+				int productPrice = rs.getInt("productPrice");
+				int productRemain = rs.getInt("productRemain");
+				String productContent = rs.getString("productContent");
+				String productImg = rs.getString("productImg");
+				int pbrandCode = rs.getInt("pbrandCode");
+				product = new ProductDto(productCode, productName, pbrandName, ptypeName, ptypeCode, productPrice, productRemain, productContent, productImg, pbrandCode);
+				
+			}
+			
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return product;
 	}
 }

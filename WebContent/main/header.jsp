@@ -30,7 +30,7 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
 	                  <a class="nav-link" href="${conPath }/memberView.do">${member.memberName }님</a>
 	                </li>
 					<li class="nav-item">
-	                  <a class="nav-link" href="${conPath }/signinView.do">장바구니</a>
+	                  <a class="nav-link" href="${conPath }/cartView.do">장바구니</a>
 	                </li>
 					<li class="nav-item">
 	                  <a class="nav-link" href="${conPath }/signinView.do">주문목록</a>
@@ -73,10 +73,10 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
                             		상품보기
                         </a>
                         <div class="dropdown-menu">
-                        <a href="${conPath }/productListView.do" class="dropdown-item">홍차</a>
-                        <a href="#" class="dropdown-item">녹차</a>
-                        <a href="#" class="dropdown-item">보이차</a>
-                        <a href="#" class="dropdown-item">전체</a>
+                        <a href="${conPath }/userProductListView.do?pTypeCode=1" class="dropdown-item">홍차</a>
+                        <a href="${conPath }/userProductListView.do?pTypeCode=2" class="dropdown-item">녹차</a>
+                        <a href="${conPath }/userProductListView.do?pTypeCode=7" class="dropdown-item">허브티</a>
+                        <a href="${conPath }/userProductListView.do" class="dropdown-item">전체</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -85,7 +85,7 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
                         </a>
                         <div class="dropdown-menu">
                         <a href="${conPath }/noticeBoardView.do" class="dropdown-item">공지사항</a>
-                        <a href="#" class="dropdown-item">이벤트</a>
+                        <a href="${conPath }/eventBoardView.do" class="dropdown-item">이벤트</a>
                         <a href="#" class="dropdown-item">리뷰</a>
                         </div>
                     </li>
@@ -94,7 +94,7 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
                             고객센터
                         </a>
                         <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item">QnA</a>
+                        <a href="${conPath }/qnaListView.do" class="dropdown-item">QnA</a>
                         <a href="#" class="dropdown-item">FAQ</a>
                         <a href="#" class="dropdown-item">About</a>
                         </div>

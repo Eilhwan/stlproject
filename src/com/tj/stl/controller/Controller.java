@@ -9,27 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.tj.stl.service.AdminListViewService;
-import com.tj.stl.service.AdminSignUpService;
-import com.tj.stl.service.AdminSigninService;
-import com.tj.stl.service.AdminViewService;
-import com.tj.stl.service.EmailChkService;
-import com.tj.stl.service.IdChkService;
-import com.tj.stl.service.InsertBrandService;
-import com.tj.stl.service.InsertProductService;
-import com.tj.stl.service.InsertProductViewService;
-import com.tj.stl.service.LogoutService;
-import com.tj.stl.service.MainService;
-import com.tj.stl.service.MemberModifyService;
-import com.tj.stl.service.NoticeContentViewService;
-import com.tj.stl.service.NoticeViewService;
-import com.tj.stl.service.ProductContentViewService;
-import com.tj.stl.service.ProductListViewService;
-import com.tj.stl.service.PwChkService;
-import com.tj.stl.service.Service;
-import com.tj.stl.service.SigninService;
-import com.tj.stl.service.SignupService;
-import com.tj.stl.service.WriteNoticeService;
+import com.tj.stl.service.*;
 
 /**
  * Servlet implementation class Controller
@@ -111,7 +91,7 @@ public class Controller extends HttpServlet {
 		}else if (com.equals("/adminSignIn.do")) { //관리자 로그인
 			service = new AdminSigninService();
 			service.execute(request, response);
-			viewPage = "main/main.jsp";
+			viewPage = "main.do";
 		}else if (com.equals("/adminView.do")) {
 			service = new AdminViewService();
 			service.execute(request, response);
@@ -122,6 +102,10 @@ public class Controller extends HttpServlet {
 			viewPage = "admin/adminList_view.jsp";
 		}else if (com.equals("/noticeBoardView.do")) {
 			service = new NoticeViewService();
+			service.execute(request, response);
+			viewPage = "board/noticeBoard.jsp";
+		}else if (com.equals("/eventBoardView.do")) {
+			service = new EventViewService();
 			service.execute(request, response);
 			viewPage = "board/noticeBoard.jsp";
 		}else if (com.equals("/writeNoticeView.do")) {
@@ -162,6 +146,74 @@ public class Controller extends HttpServlet {
 			service = new InsertBrandService();
 			service.execute(request, response);
 			viewPage = "admin/insertBrand_view.jsp";
+		}else if (com.equals("/userProductListView.do")) {
+			service = new UserProductListViewService();
+			service.execute(request, response);
+			viewPage = "product/product_list_view.jsp";
+		}else if (com.equals("/productEnrollView.do")) {
+			service = new selectedService();
+			service.execute(request, response);
+			viewPage = "product/product_enroll_view.jsp";
+		}else if (com.equals("/productSelect.do")) {
+			service = new SelectProductService();
+			service.execute(request, response);
+			viewPage = "product/productselect.jsp";
+		}else if (com.equals("/productenroll.do")) {
+			service = new ProductEnrollService();
+			service.execute(request, response);
+			viewPage = "userProductListView.do";
+		}else if (com.equals("/userProductContentView.do")) { // 등록된 상품 상세보기
+			service = new UserProductContentViewService();
+			service.execute(request, response);
+			viewPage = "product/userProductContent_view.jsp";
+		}else if (com.equals("/qnaListView.do")) {
+			service = new QnaListViewService();
+			service.execute(request, response);
+			viewPage = "QnA/qnaList_view.jsp";
+		}else if (com.equals("/writeqnaView.do")) {
+			viewPage = "QnA/qnaWrite_view.jsp";
+		}else if (com.equals("/qnaWirte.do")) {
+			service = new QnAWriteService();
+			service.execute(request, response);
+			viewPage = "qnaListView.do";
+		}else if (com.equals("/qnaContentView.do")) {
+			service = new QnAContentViewService();
+			service.execute(request, response);
+			viewPage = "QnA/qnaContent_view.jsp";
+		}else if (com.equals("/replyqnaView.do")) {
+			viewPage = "QnA/qnaReply_view.jsp";
+		}else if (com.equals("/qnaReply.do")) {
+			service = new QnAReplyService();
+			service.execute(request, response);
+			viewPage = "qnaListView.do";
+		}else if (com.equals("/cartView.do")) {
+			service = new CartViewService();
+			service.execute(request, response);
+			viewPage = "cart/cart_view.jsp";
+		}else if (com.equals("/insertCart.do")) {
+			service = new InsertCartService();
+			service.execute(request, response);
+			viewPage = "userProductContentView.do";
+		}else if (com.equals("/deleteCart.do")) {
+			service = new DeleteCartService();
+			service.execute(request, response);
+			viewPage = "cartView.do";
+		}else if (com.equals("/deleteCartAll.do")) {
+			service = new DeleteCartAllService();
+			service.execute(request, response);
+			viewPage = "cartView.do";
+		}else if (com.equals("/updateCart.do")) {
+			service = new UpdateCartService();
+			service.execute(request, response);
+			viewPage = "cartView.do";
+		}else if (com.equals("/checkout.do")) {
+			service = new CheckoutService();
+			service.execute(request, response);
+			viewPage = "cart/checkout.jsp";
+		}else if (com.equals("/orderProduct.do")) {
+			service = new OrderProductService();
+			service.execute(request, response);
+			viewPage = "cart/orderResult.jsp";
 		}
 		
 		

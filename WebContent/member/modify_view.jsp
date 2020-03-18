@@ -42,7 +42,7 @@
                         <li class="list-group-item p-3">등급확인</li>
                         <li class="list-group-item p-3">배송이력</li>
                         <li class="list-group-item p-3">구매이력</li>
-                        <li class="list-group-item p-3">취소이력</li>
+                        <li class="list-group-item p-3">회원탈퇴</li>
                     </ul>
                 </div>
                 <div class="col-sm">

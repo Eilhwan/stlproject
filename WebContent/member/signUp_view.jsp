@@ -121,9 +121,9 @@ $(function(){
 		<div class="form-group addr">
 			<label for="post"><b>주소</b></label>
 		    <input type="text" id="sample4_postcode" placeholder="우편번호" onclick="sample4_execDaumPostcode()" class="form-control zipcode" readonly="readonly" name="memberPost">
-			<input type="button" onclick="sample4_execDaumPostcode()" id="post" value="우편번호 찾기" class="btn-dark" readonly="readonly" name="memberAddress1" ><br>
-			<input type="text" onclick="sample4_execDaumPostcode()" id="sample4_roadAddress" placeholder="도로명주소" class="form-control" readonly="readonly" name="memberAddress2">
-			<input type="text" onclick="sample4_execDaumPostcode()" id="sample4_jibunAddress" placeholder="지번주소" class="form-control" readonly="readonly" name="memberAddress3">
+			<input type="button" onclick="sample4_execDaumPostcode()" id="post" value="우편번호 찾기" class="btn-dark" readonly="readonly" ><br>
+			<input type="text" onclick="sample4_execDaumPostcode()" id="sample4_roadAddress" placeholder="도로명주소" class="form-control" readonly="readonly" name="memberAddres1">
+			<input type="text" onclick="sample4_execDaumPostcode()" id="sample4_jibunAddress" placeholder="지번주소" class="form-control" readonly="readonly" name="memberAddress2">
 			<span id="guide" style="color:#999;display:none"></span>
 			<input type="text" id="sample4_detailAddress" placeholder="상세주소" class="form-control">
 		</div>

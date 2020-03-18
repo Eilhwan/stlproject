@@ -21,11 +21,10 @@ public class SignupService implements Service {
 		String memberPost = request.getParameter("memberPost");
 		String memberAddress1 = request.getParameter("memberAddress1");
 		String memberAddress2 = request.getParameter("memberAddress2");
-		String memberAddress3 = request.getParameter("memberAddress3");
-		String memberAddress = memberAddress1 + memberAddress3; 
+		String memberAddress = memberAddress1 + "(" + memberAddress2 + ")"; 
 		Date memberBirth = Date.valueOf(request.getParameter("memberBirth"));
 		
-		MemberDto member = new MemberDto(memberId, memberPw, memberName, memberTel, memberEmail, memberAddress, memberPost, 0, 0, null, memberBirth);
+		MemberDto member = new MemberDto(memberId, memberPw, memberName, memberTel, memberEmail, memberAddress2, memberPost, null, 0, 0, null, memberBirth, 0);
 		
 		mdao.memberSignup(member);
 

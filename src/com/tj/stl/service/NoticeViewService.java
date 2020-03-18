@@ -22,20 +22,15 @@ public class NoticeViewService implements Service {
 		final int BLOCKSIZE = 10, PAGESIZE = 10;
 		int startRow = (currentPage - 1) * PAGESIZE + 1;
 		int endRow = startRow + PAGESIZE - 1;
-		System.out.println(startRow);
-		System.out.println(endRow);
 		NoticeDao dao = NoticeDao.getInstance();
 		
 		ArrayList<NoticeDto> list = dao.getNoticelist(startRow, endRow);
 		
-		int pageCnt = (int) Math.ceil(((double)dao.getNoticeCnt()/PAGESIZE));
+		int pageCnt = (int) Math.ceil((double)(dao.getNoticeCnt()/PAGESIZE));
 		int startPage = ((currentPage - 1) / BLOCKSIZE) * BLOCKSIZE + 1;
 		int endPage = startPage + BLOCKSIZE - 1;
 		if (endPage > pageCnt) {
 			endPage = pageCnt;
-		}
-		for (NoticeDto noticeDto : list) {
-			System.out.println(noticeDto);
 		}
 		request.setAttribute("pageCnt", pageCnt);
 		request.setAttribute("pageNum", currentPage);

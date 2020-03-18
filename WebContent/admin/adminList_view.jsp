@@ -56,19 +56,19 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
 							<tr><td class="text-right"><button onclick="location.href='${conPath }/adminSignUpView.do'" class="btn btn-dark">관리자 계정 만들기</button></td></tr>
 							<tr><td colspan="8" class="text-center">
 								<c:if test="${startPage > 10 }">
-									<a href="${conPath }/adminView.do?pageNum=${startPage - 1 }">[이전]</a>
+									<a href="${conPath }/productListView.do?pageNum=${startPage - 1 }">[이전]</a>
 								</c:if>
 								<c:forEach var="i" begin="${startPage }" end="${endPage }">
 									<c:if test="${pageNum eq i }">
 										<b>${i }</b>
 									</c:if>
 									<c:if test="${pageNum != i }">									
-										<a href="${conPath }/adminView.do?pageNum=${i }">[${i }]</a>
+										<a href="${conPath }/productListView.do?pageNum=${i }">[${i }]</a>
 									</c:if>
 								
 								</c:forEach>
 								<c:if test="${endPage < pageCnt}">
-									<a href="${conPath }/adminView.do?pageNum=${endPage + 1 }">[다음]</a>
+									<a href="${conPath }/productListView.do?pageNum=${endPage + 1 }">[다음]</a>
 								</c:if>
 							</td></tr>
 						</tfoot>

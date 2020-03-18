@@ -11,10 +11,15 @@ public class MainService implements Service {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		NoticeDao dao = NoticeDao.getInstance();
 		
-		request.setAttribute("notice1", dao.getMainEvent(1));
-		request.setAttribute("notice2", dao.getMainEvent(2));
-		request.setAttribute("notice3", dao.getMainEvent(3));
-		request.setAttribute("notice4", dao.getMainEvent(4));
+		request.setAttribute("notice1", dao.getMainNotice(1));
+		request.setAttribute("notice2", dao.getMainNotice(2));
+		request.setAttribute("notice3", dao.getMainNotice(3));
+		request.setAttribute("notice4", dao.getMainNotice(4));
+		
+		request.setAttribute("event1", dao.getMainEvent(1));
+		request.setAttribute("event2", dao.getMainEvent(2));
+		request.setAttribute("event3", dao.getMainEvent(3));
+		request.setAttribute("event4", dao.getMainEvent(4));
 		
 
 	}
