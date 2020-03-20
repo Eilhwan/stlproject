@@ -12,8 +12,28 @@
 		location.href='${conPath }/adminView.do'
 	</script>
 </c:if>
+<c:if test="${not empty resultmsg }">
+	<script>
+		alert('${resultmsg }');
+	</script>
+</c:if>
+<c:if test="${not empty errormsg }">
+	<script>
+		alert('${errormsg }');
+	</script>
+</c:if>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+	$(function(){
+		$('.del-link').click(function(){
+			var conDel = confirm('정말 삭제하시겠습니까?');
+			if (!conDel) {
+				return false;
+			}
+		});
+	});
+</script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
@@ -23,10 +43,10 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
 		<div class="row">
 			<div class="col-sm-2 my-5">
 				<ul class="list-group">
-					<li class="list-group-item p-3">회원리스트</li>
-					<li class="list-group-item p-3">탈퇴회원목록</li>
-					<li class="list-group-item p-3">통계</li>
-					<li class="list-group-item p-3">관리자목록</li>
+					<li class="list-group-item p-3"><a href="${conPath }/adminView.do">회원리스트</a></li>
+					<li class="list-group-item p-3"><a href="${conPath }/productListView.do">물품목록</a></li>
+					
+					<li class="list-group-item p-3"><a href='${conPath }/adminListView.do'>관리자목록</a></li>
 				</ul>
 			</div>
 			<div class="col-sm">
@@ -47,7 +67,7 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
 							<c:if test="${not empty list }">
 								<c:forEach items="${list }" var="admin">
 									<tr>
-										<td>${admin.adminId }</td>
+										<td><a href="${conPath }/deleteadmin.do?adminId=${admin.adminId }" class="del-link">${admin.adminId }</a></td>
 									</tr>								
 								</c:forEach>
 							</c:if>

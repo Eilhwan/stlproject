@@ -25,7 +25,6 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
 				<ul class="list-group">
 					<li class="list-group-item p-3"><a href="${conPath }/adminView.do">회원리스트</a></li>
 					<li class="list-group-item p-3"><a href="${conPath }/productListView.do">물품목록</a></li>
-					<li class="list-group-item p-3">통계</li>
 					<li class="list-group-item p-3"><a href='${conPath }/adminListView.do'>관리자목록</a></li>
 				</ul>
 			</div>

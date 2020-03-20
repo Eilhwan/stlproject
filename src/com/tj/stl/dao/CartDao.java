@@ -75,6 +75,39 @@ public class CartDao {
 		
 		return result;
 	}
+	public int cartExsist(String memberId, int peCode) {
+		int result = EXSIST_ON;
+		String sql = "SELECT COUNT(*) FROM CART C, PRODUCTENROLL PE WHERE MEMBERID = ? AND C.PRODUCTCODE = ?";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			pstmt.setInt(2, peCode);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+	}
 	public CartDto getCart(int cartNo) {
 		CartDto cart = null;
 		String sql = "SELECT * FROM CART C, PRODUCTENROLL E, PRODUCT P WHERE C.PRODUCTCODE = P.PRODUCTCODE AND E.PRODUCTCODE = P.PRODUCTCODE AND CARTNO = ?";

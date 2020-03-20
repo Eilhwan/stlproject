@@ -46,7 +46,7 @@ public class ProductDao {
 		return conn;
 	}
 	//갯수세는 메서드
-	public int getNoticeCnt() {
+	public int getProductCnt() {
 		int result = 0;
 		String sql = "SELECT COUNT(*) FROM PRODUCT";
 		
@@ -331,6 +331,37 @@ public class ProductDao {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, pBrandName);
+			result = pstmt.executeUpdate();
+			System.out.println(result == EXSIST_ON ? "브랜드 있음" : "브랜드 없음");
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+	}
+	public int stockMinus(int ea, int productCode) {
+		int result = 0;
+		String sql = "UPDATE PRODUCT SET PRODUCTREMAIN = PRODUCTREMAIN - ? WHERE PRODUCTCODE = ?";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, ea);
+			pstmt.setInt(2, productCode);
 			result = pstmt.executeUpdate();
 			System.out.println(result == EXSIST_ON ? "브랜드 있음" : "브랜드 없음");
 		} catch (SQLException e) {

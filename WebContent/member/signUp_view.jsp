@@ -119,13 +119,14 @@ $(function(){
 		 	<input type="text" class="form-control" id="datePicker" name="memberBirth">
 		</div>
 		<div class="form-group addr">
-			<label for="post"><b>주소</b></label>
-		    <input type="text" id="sample4_postcode" placeholder="우편번호" onclick="sample4_execDaumPostcode()" class="form-control zipcode" readonly="readonly" name="memberPost">
-			<input type="button" onclick="sample4_execDaumPostcode()" id="post" value="우편번호 찾기" class="btn-dark" readonly="readonly" ><br>
-			<input type="text" onclick="sample4_execDaumPostcode()" id="sample4_roadAddress" placeholder="도로명주소" class="form-control" readonly="readonly" name="memberAddres1">
-			<input type="text" onclick="sample4_execDaumPostcode()" id="sample4_jibunAddress" placeholder="지번주소" class="form-control" readonly="readonly" name="memberAddress2">
+			<label for="post"><b>주소</b></label><br>				
+	        <input type="text" id="sample4_postcode" readonly="readonly" placeholder="우편번호" name="memberPost">
+			<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+			<input type="text" onclick="sample4_execDaumPostcode()" id="sample4_roadAddress" placeholder="도로명주소" readonly="readonly" class="form-control" name="address1">
+			<input type="text" onclick="sample4_execDaumPostcode()" id="sample4_jibunAddress" placeholder="지번주소" readonly="readonly" class="form-control" name="address2">
 			<span id="guide" style="color:#999;display:none"></span>
-			<input type="text" id="sample4_detailAddress" placeholder="상세주소" class="form-control">
+			<input type="text" id="sample4_detailAddress" placeholder="상세주소" class="form-control" name="address3">
+			<input type="text" id="sample4_extraAddress" placeholder="참고항목" readonly="readonly" class="form-control" name="address4">
 		</div>
 		<div class="form-group text-center">
 		 	<input type="submit" value="가입하기" class="btn-dark">

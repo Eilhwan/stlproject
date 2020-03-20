@@ -5,18 +5,15 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.tj.stl.dao.NoticeDao;
-import com.tj.stl.dao.ProductDao;
-import com.tj.stl.dto.NoticeDto;
-import com.tj.stl.dto.ProductDto;
+import com.tj.stl.dao.QnADao;
+import com.tj.stl.dao.ReviewDao;
+import com.tj.stl.dto.QnA;
+import com.tj.stl.dto.ReviewDto;
 
-public class ProductListViewService implements Service {
+public class ReViewListService implements Service {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		ProductDao dao = ProductDao.getInstance();
-		
-		
 		String pageNum = request.getParameter("pageNum");
 		if (pageNum == null) {
 			pageNum = "1";
@@ -25,13 +22,12 @@ public class ProductListViewService implements Service {
 		final int BLOCKSIZE = 10, PAGESIZE = 10;
 		int startRow = (currentPage - 1) * PAGESIZE + 1;
 		int endRow = startRow + PAGESIZE - 1;
-		System.out.println(startRow);
-		System.out.println(endRow);
 		
+		ReviewDao dao = ReviewDao.getInstance();
 		
-		ArrayList<ProductDto> list = dao.getProductlist(startRow, endRow);
+		ArrayList<ReviewDto> list = dao.getReviewlist(startRow, endRow);
 		
-		int pageCnt = (int) Math.ceil(((double)dao.getProductCnt()/PAGESIZE));
+		int pageCnt = (int) Math.ceil(((double)dao.getReviewCnt()/PAGESIZE));
 		int startPage = ((currentPage - 1) / BLOCKSIZE) * BLOCKSIZE + 1;
 		int endPage = startPage + BLOCKSIZE - 1;
 		if (endPage > pageCnt) {
@@ -44,6 +40,7 @@ public class ProductListViewService implements Service {
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("list", list);
+
 	}
 
 }

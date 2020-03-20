@@ -13,6 +13,7 @@ public class InsertCartService implements Service {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		
 		String ea = request.getParameter("productEA");
 		String pe = request.getParameter("peCode");
 
@@ -26,12 +27,18 @@ public class InsertCartService implements Service {
 		HttpSession session = request.getSession();
 		CartDao cdao = CartDao.getInstance();
 		ProductEnrollDao pedao = ProductEnrollDao.getInstance();
-		
 		MemberDto member = (MemberDto) session.getAttribute("member");
-		ProductEnroll product = pedao.getUserProduct(peCode);
-		
-		cdao.insertCart(product, member, productEA);
-		request.setAttribute("resultmsg", "장바구니에 추가하였습니다.");
+		if (member == null) {
+		}else {
+			if (cdao.cartExsist(member.getMemberId(), peCode) == CartDao.EXSIST_ON) {
+				request.setAttribute("resultmsg", "중복된 상품이 장바구니에 존재합니다.");
+			}else {
+				ProductEnroll product = pedao.getUserProduct(peCode);
+				
+				cdao.insertCart(product, member, productEA);
+				request.setAttribute("resultmsg", "장바구니에 추가하였습니다.");			
+			}			
+		}
 		
 	}
 

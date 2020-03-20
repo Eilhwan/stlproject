@@ -67,10 +67,10 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
 							${cart.pePrice }
 					</td>
 					<td>
-							${cart.productEA }<int type="hidden" value="${cart.productEA }" name="productEA">
+							${cart.productEA }<input type="hidden" value="${cart.productEA }" name="productEA">
 					</td>
 					<td>
-							 ${cart.cartPrice }
+							 ${cart.cartPrice }<input type="hidden" value="${cart.cartPrice }" name="cartPrice">
 					</td>
 				</tr>
 				</c:forEach>
@@ -86,13 +86,13 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
 					<c:set var="total" value="${total = total + each.cartPrice }"></c:set>
 					<c:set var="discount" value="${discount = discount + each.cartPrice * (each.peDiscount/100) }"></c:set>
 				</c:forEach>
-					<fmt:parseNumber value="${total }" integerOnly="true" type="number"></fmt:parseNumber>
+					
 					<th>총상품가격</th>
 					<td>${total }원</td>
 				</tr>
 				<tr>
 					<th>즉시할인</th>
-					<td>${discount }원</td>
+					<td><fmt:parseNumber value="${discount }" integerOnly="true"></fmt:parseNumber>원</td>
 				</tr>
 				<tr>
 					<th>배송비</th>
@@ -104,7 +104,7 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
 				</tr>
 				<tr>
 					<th>총결제금액</th>
-					<td>${(total - discount) }원<input type="hidden" value="${(total - discount) }" name="orderTotal"></td>
+					<td><fmt:parseNumber value="${(total - discount) + 2500 }" integerOnly="true"></fmt:parseNumber> 원<input type="hidden" value="<fmt:parseNumber value="${total - discount}" integerOnly="true" type="number"></fmt:parseNumber>" name="orderTotal"></td>
 				</tr>
 				<tr>
 					<th>결제방법</th>

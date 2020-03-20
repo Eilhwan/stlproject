@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+
+.buttons-td{
+    line-height: 98px;
+    text-align: center;	
+}
+.buttons-td span{
+	padding: 20px;
+	color: white;
+    border-radius: 10px;
+}

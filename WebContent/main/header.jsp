@@ -10,6 +10,17 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script>
+	$(function(){
+		$('#sc-main').submit(function(){
+			let searchMain = $('#searchMain').val();
+			if (searchMain == "") {
+				alert('검색어를 입력하세요.');
+				return false;
+			}
+		});
+	});
+</script>
 </head>
 <body>
 	<header>
@@ -17,42 +28,42 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
 			<c:if test="${empty member && empty admin}">
 	            <ul class="nav justify-content-end">
 	                <li class="nav-item">
-	                  <a class="nav-link" href="${conPath }/signinView.do">Sign-in</a>
+	                  <a class="nav-link text-white" href="${conPath }/signinView.do">Sign-in</a>
 	                </li>
 	                <li class="nav-item">
-	                  <a class="nav-link bg-dark" href="${conPath }/signupView.do">Sign-up</a>
+	                  <a class="nav-link bg-dark text-white" href="${conPath }/signupView.do">Sign-up</a>
 	                </li>
 	              </ul>
 			</c:if>
 			<c:if test="${not empty member && empty admin}">
 		 		<ul class="nav justify-content-end">
 					<li class="nav-item">
-	                  <a class="nav-link" href="${conPath }/memberView.do">${member.memberName }님</a>
+	                  <a class="nav-link text-white" href="${conPath }/memberView.do">${member.memberName }님</a>
 	                </li>
 					<li class="nav-item">
-	                  <a class="nav-link" href="${conPath }/cartView.do">장바구니</a>
+	                  <a class="nav-link text-white" href="${conPath }/cartView.do">장바구니</a>
 	                </li>
 					<li class="nav-item">
-	                  <a class="nav-link" href="${conPath }/signinView.do">주문목록</a>
+	                  <a class="nav-link text-white" href="${conPath }/orderListView.do">주문목록</a>
 	                </li>
 	                <li class="nav-item">
-	                  <a class="nav-link bg-dark" href="${conPath }/logout.do">Logout</a>
+	                  <a class="nav-link bg-dark text-white" href="${conPath }/logout.do">Logout</a>
 	                </li>
              	 </ul>
 			</c:if>
 			<c:if test="${not empty admin && empty member}">
 		 		<ul class="nav justify-content-end">
 					<li class="nav-item">
-	                  <a class="nav-link" href="${conPath }/memberView.do">관리자 ${admin.adminId }님</a>
+	                  <a class="nav-link text-white">관리자 ${admin.adminId }님</a>
 	                </li>
 					<li class="nav-item">
-	                  <a class="nav-link" href="${conPath }/adminView.do">관리메뉴</a>
+	                  <a class="nav-link text-white" href="${conPath }/adminView.do">관리메뉴</a>
 	                </li>
 					<li class="nav-item">
-	                  <a class="nav-link" href="${conPath }/noticeBoardView.do">공지사항</a>
+	                  <a class="nav-link text-white" href="${conPath }/noticeBoardView.do">공지사항</a>
 	                </li>
 	                <li class="nav-item">
-	                  <a class="nav-link bg-dark" href="${conPath }/logout.do">Logout</a>
+	                  <a class="nav-link bg-dark text-white" href="${conPath }/logout.do">Logout</a>
 	                </li>
              	 </ul>
 			</c:if>
@@ -73,35 +84,33 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
                             		상품보기
                         </a>
                         <div class="dropdown-menu">
-                        <a href="${conPath }/userProductListView.do?pTypeCode=1" class="dropdown-item">홍차</a>
-                        <a href="${conPath }/userProductListView.do?pTypeCode=2" class="dropdown-item">녹차</a>
-                        <a href="${conPath }/userProductListView.do?pTypeCode=7" class="dropdown-item">허브티</a>
-                        <a href="${conPath }/userProductListView.do" class="dropdown-item">전체</a>
+	                        <a href="${conPath }/userProductListView.do?pTypeCode=1" class="dropdown-item">홍차</a>
+	                        <a href="${conPath }/userProductListView.do?pTypeCode=2" class="dropdown-item">녹차</a>
+	                        <a href="${conPath }/userProductListView.do?pTypeCode=7" class="dropdown-item">허브티</a>
+	                        <a href="${conPath }/userProductListView.do" class="dropdown-item">전체</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                            게시판
+                          		  게시판
                         </a>
                         <div class="dropdown-menu">
-                        <a href="${conPath }/noticeBoardView.do" class="dropdown-item">공지사항</a>
-                        <a href="${conPath }/eventBoardView.do" class="dropdown-item">이벤트</a>
-                        <a href="#" class="dropdown-item">리뷰</a>
+	                        <a href="${conPath }/noticeBoardView.do" class="dropdown-item">공지사항</a>
+	                        <a href="${conPath }/eventBoardView.do" class="dropdown-item">이벤트</a>
+	                        <a href="${conPath }/reviewBoardView.do" class="dropdown-item">리뷰게시판</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                            고객센터
+                           		 고객센터
                         </a>
                         <div class="dropdown-menu">
-                        <a href="${conPath }/qnaListView.do" class="dropdown-item">QnA</a>
-                        <a href="#" class="dropdown-item">FAQ</a>
-                        <a href="#" class="dropdown-item">About</a>
+                        	<a href="${conPath }/qnaListView.do" class="dropdown-item">QnA</a>
                         </div>
                     </li>
                 </ul>
-                <form class="form-inline mt-2 mt-md-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                <form class="form-inline mt-2 mt-md-0" action="${conPath }/mainSearch.do" id="sc-main">
+                    <input class="form-control mr-sm-2" type="text" placeholder="상품이름" name="search-keyword" id="searchMain" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>

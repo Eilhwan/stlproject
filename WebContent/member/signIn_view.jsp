@@ -6,14 +6,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<c:if test="${not empty logoutmsg }">
+<c:if test="${not empty resultmsg }">
 	<script>
-		alert('${logoutmsg }');
+		alert('${resultmsg }');
 	</script>
 </c:if>
-<c:if test="${not empty logouterror }">
+<c:if test="${not empty errormsg }">
 	<script>
-		alert('${logouterror }');
+		alert('${errormsg }');
 		history.back();
 	</script>
 </c:if>

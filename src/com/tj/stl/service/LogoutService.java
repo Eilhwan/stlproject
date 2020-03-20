@@ -11,9 +11,9 @@ public class LogoutService implements Service {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("member") != null || session.getAttribute("admin") != null) {
 			session.invalidate();
-			request.setAttribute("logoutmsg", "성공적으로 로그아웃 되었습니다.");			
+			request.setAttribute("resultmsg", "성공적으로 로그아웃 되었습니다.");			
 		}else {
-			request.setAttribute("logouterror", "비정상적인 접근입니다.");
+			request.setAttribute("errormsg", "비정상적인 접근입니다.");
 		}
 	}
 

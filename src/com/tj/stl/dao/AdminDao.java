@@ -45,7 +45,7 @@ public class AdminDao {
 	//admin 로그인
 	public AdminDto adminSignin(String adminId, String adminPw) {
 		AdminDto admin = null;
-		String sql = "SELECT * FROM ADMIN WHERE ADMINID = ? AND ADMINPW = ?";
+		String sql = "SELECT * FROM ADMIN WHERE ADMINID = ? AND ADMINPW = ? AND ADMINPW != '-1'";
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -141,6 +141,33 @@ public class AdminDao {
 		} finally {
 			try {
 				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+	}
+	public int delAdmin(String adminId) {
+		int result = FAIL;
+		String sql = "Update ADMIN SET ADMINPW = -1 WHERE ADMINID = ?";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, adminId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			
+		} finally {
+			try {
 				if(pstmt!=null) pstmt.close();
 				if(conn!=null) conn.close();
 			} catch (SQLException e) {

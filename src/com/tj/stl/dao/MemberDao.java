@@ -149,7 +149,7 @@ public class MemberDao {
 	//로그인 메서드
 	public MemberDto memberSignin(String memberId, String memberPw) {
 		MemberDto member = null;
-		String sql = "SELECT * FROM MEMBER M, MEMBERGRADE MG WHERE M.GRADELEVEL = MG.GRADELEVEL AND MEMBERID = ? AND MEMBERPW= ? AND MEMBERSTATUS = 1";
+		String sql = "SELECT * FROM MEMBER M, MEMBERGRADE MG WHERE TOTALSPENT BETWEEN LOWSPENT AND HISPENT AND MEMBERID = ? AND MEMBERPW= ? AND MEMBERSTATUS = 1";
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -173,7 +173,7 @@ public class MemberDao {
 				int memberPoint = rs.getInt("memberPoint");
 				Date memberRdate = rs.getDate("memberRdate");
 				Date memberBirth = rs.getDate("memberBirth");
-				member = new MemberDto(memberId, memberPw, memberName, memberTel, memberEmail, memberAddress, memberPost, gradeName, 0, gradeLevel, memberRdate, memberBirth, memberPoint);
+				member = new MemberDto(memberId, memberPw, memberName, memberTel, memberEmail, memberAddress, memberPost, gradeName, totalSpent, gradeLevel, memberRdate, memberBirth, memberPoint);
 				member.setGradeName(gradeName);
 				System.out.println(member+"세션 받았음");
 			}
@@ -208,6 +208,91 @@ public class MemberDao {
 			pstmt.setString(3, member.getMemberEmail());
 			pstmt.setString(4, member.getMemberPw());
 			pstmt.setString(5, member.getMemberId());
+			result = pstmt.executeUpdate();
+			System.out.println(member + "의 정보 수정 요청이 들어왔습니다.");
+			System.out.println(result == SUCCESS ? "정보수정이 성공적으로 완료되었습니다." : "정보수정 실패");
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			System.out.println("정보수정 정보:" + member.toString());
+		} finally {
+			try {
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	public int memberDelete(MemberDto member) {
+		int result = FAIL;
+		String sql = "UPDATE MEMBER SET MEMBERSTATUS = 0 WHERE MEMBERID = ?";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member.getMemberId());
+			result = pstmt.executeUpdate();
+			System.out.println(member + "의 정보 수정 요청이 들어왔습니다.");
+			System.out.println(result == SUCCESS ? "정보수정이 성공적으로 완료되었습니다." : "정보수정 실패");
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			System.out.println("정보수정 정보:" + member.toString());
+		} finally {
+			try {
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	public int memberTotUp(int price, int point, String memberId) {
+		int result = FAIL;
+		String sql = "UPDATE MEMBER SET TOTALSPENT = TOTALSPENT + ?, MEMBERPOINT = MEMBERPOINT + ? WHERE MEMBERID = ?";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, price);
+			pstmt.setInt(2, point);
+			pstmt.setString(3, memberId);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	public int memberModifyAddress(MemberDto member) {
+		int result = FAIL;
+		String sql = "UPDATE MEMBER SET MEMBERADDRESS= ? WHERE MEMBERID = ?";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member.getMemberAddress());
+			pstmt.setString(2, member.getMemberId());
 			result = pstmt.executeUpdate();
 			System.out.println(member + "의 정보 수정 요청이 들어왔습니다.");
 			System.out.println(result == SUCCESS ? "정보수정이 성공적으로 완료되었습니다." : "정보수정 실패");

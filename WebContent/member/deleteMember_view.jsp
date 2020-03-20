@@ -16,35 +16,63 @@
 <script>
 	$(function() {
 		$('#submit').click(function() {
-			let memberPw = $('#memberPw').val();
-			if (memberPw != '${member.memberPw}') {
-				alert('비밀번호를 확인해주세요.');
+			var memberPw = $('#memberPw').val();
+			var pwChk = $('#pwChk').val();
+			if (memberPw == "") {
+				alert('비밀번호를 입력하세요');
 				$('#memberPw').val("");
+				$('#memberPw').focus();
+				return false;
+			}else if (pwChk == "") {
+				alert('비밀번호 확인을 입력하세요');
+				$('#memberPw').val("");
+				$('#memberPw').focus();
+				return false;
+			}else if (memberPw != pwChk) {
+				alert('비밀번호가 일치하지 않습니다.');
+				$('#memberPw').val("");
+				$('#pwChk').val("");
+				$('#memberPw').focus();
 				return false;
 			}
 			});
 		});
 		$('#memberPw').keydown(function(key) {
-			if (key.keyCode == 13) {
-				let memberPw = $('#memberPw').val();
-				if (memberPw != '${member.memberPw}') {
-					alert('비밀번호를 확인해주세요.');
+			
+			if (key.keyCode == 13) {			
+				var memberPw = $('#memberPw').val();
+				var pwChk = $('#pwChk').val();
+				var memberPw = $('#memberPw').val();
+				var pwChk = $('#pwChk').val();
+				if (memberPw == "") {
+					alert('비밀번호를 입력하세요');
 					$('#memberPw').val("");
+					$('#memberPw').focus();
 					return false;
-				}			
-		});
+				}else if (pwChk == "") {
+					alert('비밀번호 확인을 입력하세요');
+					$('#memberPw').val("");
+					$('#memberPw').focus();
+					return false;
+				}else if (memberPw != pwChk) {
+					alert('비밀번호가 일치하지 않습니다.');
+					$('#memberPw').val("");
+					$('#pwChk').val("");
+					$('#memberPw').focus();
+					return false;
+				}	
+		};
 	});
 </script>
 </head>
 <body>
 	<jsp:include page="../main/header.jsp" />
-	<form action="${conPath }/modify_view.do" method="post">
+	<form action="${conPath }/delete_member.do" method="post">
 	<div class="container my-5" id="main">
-		<h2>회원정보확인</h2>
+		<h2>회원탈퇴확인</h2>
 		<div>
-
 			<p>
-				<b>${member.memberName }</b>님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인 합니다.
+				<b>${member.memberName }</b>님의 본인확인을 위해 비밀번호를 다시 한번 확인 합니다.
 			</p>
 			<table class="table table-bordered">
 				<tr>
@@ -54,6 +82,10 @@
 				<tr>
 					<td>비밀번호</td>
 					<td><input type="password" name="memberPw" id="memberPw"></td>
+				</tr>
+				<tr>
+					<td>비밀번호확인</td>
+					<td><input type="password" name="pwChk" id="pwChk"></td>
 				</tr>
 				<tr>
 					<td colspan="2" class="td text-center">
