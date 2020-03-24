@@ -33,7 +33,7 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
 <body>
 	<jsp:include page="../main/header.jsp"/>
 	<div class="container my-5">
-		<h2>상품 개시</h2>
+		<h2>상품 게시</h2>
 		<form action="${conPath }/productenroll.do" method="post" enctype="multipart/form-data">
 			<table class="table table-bordered">
 				<tr>

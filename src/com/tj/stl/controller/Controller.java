@@ -156,6 +156,10 @@ public class Controller extends HttpServlet {
 			service = new NoticeContentViewService();
 			service.execute(request, response);
 			viewPage = "board/noticeContent_view.jsp";
+		}else if (com.equals("/deleteNotice.do")) {
+			service = new DeleteNoticeService();
+			service.execute(request, response);
+			viewPage = "/noticeBoardView.do";
 		}else if (com.equals("/qnaListView.do")) {  //QNA게시판
 			service = new QnaListViewService();
 			service.execute(request, response);
@@ -186,8 +190,6 @@ public class Controller extends HttpServlet {
 			viewPage = "board/reviewList.jsp";
 		}else if (com.equals("/writereviewView.do")) {//review게시판
 			writable = 1;
-			service = new ReViewListService();
-			service.execute(request, response);
 			viewPage = "board/reviewWrite.jsp";
 		}else if (com.equals("/reviewContentView.do")) {//review게시판
 			service = new ReviewContentViewService();
@@ -201,6 +203,7 @@ public class Controller extends HttpServlet {
 			}
 			viewPage = "qnaListView.do";
 		}
+		// 여기까지 했음
 		
 		//상품관련커맨드
 		if (com.equals("/productListView.do")) { //상품관리페이지

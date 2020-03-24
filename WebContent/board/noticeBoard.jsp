@@ -6,6 +6,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+<c:if test="${not empty resultmsg }">
+	<script>
+		alert('${resultmsg }')
+	</script>
+</c:if>
+<c:if test="${not empty errormsg }">
+	<script>
+		alert('${errormsg }')
+	</script>
+</c:if>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet"

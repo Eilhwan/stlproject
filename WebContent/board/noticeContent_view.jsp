@@ -31,7 +31,7 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
 				<td colspan="2" class="text-right">
 				<c:if test="${not empty admin }">
 					<button class="btn-dark" onclick="location.href='${conPath }/noticeContent_modify'">수정</button>
-					<button class="btn-dark" onclick="location.href='${conPath }/noticeContent_delete'">삭제</button>
+					<button class="btn-dark" onclick="location.href='${conPath }/deleteNotice.do?noticeNo=${param.noticeNo }'">삭제</button>
 				</c:if>
 					<button class="btn-dark" onclick="location.href='${conPath }/noticeBoardView.do'">목록</button>
 				</td>

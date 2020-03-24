@@ -55,8 +55,8 @@
 	<jsp:include page="header.jsp" />
 	<div class="container my-5">	
 		  <div class="slider container">
-		   	<div><img src="${conPath }/img/twg.jpg"></div>
-		   	<div><img src="${conPath }/img/potnam.jpg"></div>
+		   	<div><img src="${conPath }/img/twg.jpg" width="1000" height="500"></div>
+		   	<div><img src="${conPath }/img/potnam.jpg" width="1000" height="500"></div>
 		 </div>
 		<div class="row featurette">
 			<div class="col-md-7">
