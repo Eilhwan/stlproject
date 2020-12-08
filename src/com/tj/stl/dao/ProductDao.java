@@ -331,7 +331,11 @@ public class ProductDao {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, pBrandName);
-			result = pstmt.executeUpdate();
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
 			System.out.println(result == EXSIST_ON ? "브랜드 있음" : "브랜드 없음");
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

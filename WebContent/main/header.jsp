@@ -69,18 +69,15 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
 			</c:if>
         </div> 
         <nav class="navbar navbar-expand navbar-dark bg-dark p-3">
-            <a class="navbar-brand" href="#">STL</a>
+            <a class="navbar-brand" href="${conPath }/main.do">STL</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="${conPath }/main.do">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item dropdown hovered">
-                        <a class="nav-link" href="#" id="navbardrop" data-toggle="dropdown">
+	                <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                             		상품보기
                         </a>
                         <div class="dropdown-menu">

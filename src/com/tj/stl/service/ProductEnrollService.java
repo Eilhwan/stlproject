@@ -78,7 +78,7 @@ public class ProductEnrollService implements Service {
 		String peImg1 = fileNames[1];
 		int pePrice = Integer.parseInt(mRequest.getParameter("pePrice"));
 		int pePoint = Integer.parseInt(mRequest.getParameter("pePoint"));
-		int peDiscount = Integer.parseInt(mRequest.getParameter("peDiscount"));
+		int peDiscount = Integer.parseInt(mRequest.getParameter("peDiscount") == "" ? "0" : mRequest.getParameter("peDiscount"));
 		
 		ProductEnrollDao dao = ProductEnrollDao.getInstance();
 		ProductEnroll product = new ProductEnroll(0, productCode, pTypeCode, peName, peContent, peImg1, peImg2, null, pePrice, 0, pePoint, 0, peDiscount, 1);

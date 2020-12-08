@@ -203,7 +203,6 @@ public class Controller extends HttpServlet {
 			}
 			viewPage = "qnaListView.do";
 		}
-		// 여기까지 했음
 		
 		//상품관련커맨드
 		if (com.equals("/productListView.do")) { //상품관리페이지
@@ -292,7 +291,7 @@ public class Controller extends HttpServlet {
 			viewPage = "cart/orderedList.jsp";
 		}
 		
-		
+		System.out.println(viewPage);
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
 	}

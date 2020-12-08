@@ -34,6 +34,7 @@ public class MemberDao {
 		try {
 			Context ctx = new InitialContext();
 			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/Oracle11g");
+			System.out.println(ds);
 			conn = ds.getConnection();
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
@@ -41,6 +42,7 @@ public class MemberDao {
 		}
 		return conn;
 	}
+	
 	//중복체크 메섣
 	public int memberIdcheck(String memberId) {
 		int result = EXSIST_ON;
